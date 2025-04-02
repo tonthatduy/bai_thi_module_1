@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2 </title>
+</head>
+<body>
+<script>
+    let number1 = prompt("Nhập tử số của phân số 1 ");
+    while (number1 == 0 || isNaN(number1)) {
+        number1 = prompt("Nhập lại tử số của phân số 1 ");
+    }
+    let number2 = prompt("Nhập mẫu số của phân số 1 ");
+    while (number2 == 0 || isNaN(number2)) {
+        number2 = prompt("Nhập lại mẫu số của phân số 1 ");
+    }
+    let number3 = prompt("Nhập tử  số của phân số 2 ");
+    while (number3 == 0 || isNaN(number3)) {
+        number3 = prompt("Nhập lại tử số của phân số 2 ");
+    }
+    let number4 = prompt("Nhập mẫu số của phân số 2 ");
+    while (number4 == 0 || isNaN(number4)) {
+        number4 = prompt("Nhập lại mẫu số của phân số 2 ");
+    }
+
+    function kiemTraPhanSo(a, b, c, d) {
+        if (a * d === b * c) {
+            return "2 Phân số bằng nhau";
+        }
+        return "2 Phân số không bằng nhau";
+    }
+
+    alert(kiemTraPhanSo(number1, number2, number3, number4));
+</script>
+</body>
+</html>

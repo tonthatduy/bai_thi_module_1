@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 4 </title>
+</head>
+<body>
+<button type="button" onclick="addDanhSachSoTietKiem()">Thêm Danh Sách</button>
+<div id="ketQua">
+</div>
+<script>
+    let soTietKiem = [];
+
+    class SoTietKiem {
+        constructor(maSo, loaiTietKiem, tenKhachHang, chungMinhNhanDan, ngayMoSo, soTienGui) {
+            this.maSo = maSo;
+            this.loaiTietKiem = loaiTietKiem;
+            this.tenKhachHang = tenKhachHang;
+            this.chungMinhNhanDan = chungMinhNhanDan;
+            this.ngayMoSo = ngayMoSo;
+            this.soTienGui = soTienGui;
+        }
+
+        getMaSo() {
+            return this.maSo;
+        }
+
+        setMaSo(ma) {
+            this.maSo = ma;
+        }
+
+        getLoaiTietKiem() {
+            return this.loaiTietKiem;
+        }
+
+        setLoaiTietKiem(loai) {
+            this.loaiTietKiem = loai;
+        }
+
+        getTenKhachHang() {
+            return this.tenKhachHang;
+        }
+
+        setTenKhachHang(ten) {
+            this.tenKhachHang = ten;
+        }
+
+        getChungMinhNhanDan() {
+            return this.chungMinhNhanDan
+        }
+
+        setChungMinhNhanDan(chungminh) {
+            this.chungMinhNhanDan = chungminh;
+        }
+
+        getNgayMoSo() {
+            return this.ngayMoSo;
+        }
+
+        setNgayMoSo(ngay) {
+            this.ngayMoSo = ngay;
+        }
+
+        getSoTienGui() {
+            return this.soTienGui;
+        }
+
+        setSoTienGui(tiengui) {
+            this.soTienGui = tiengui;
+        }
+    }
+
+    let danhSach1 = new SoTietKiem("1", "Ngắn Hạn", "Duy", 123456781, "12/12/2024", 2000000);
+    let danhSach2 = new SoTietKiem("2", "Dài Hạn", "Trang", 123456782, "01/03/2025", 1000000);
+    let danhSach3 = new SoTietKiem("3", "Ngắn Hạn", "Dung", 123456783, "01/04/2025", 500000);
+    soTietKiem.push(danhSach1, danhSach2, danhSach3);
+    hienThiSoTietKiem(soTietKiem);
+
+    function hienThiSoTietKiem(list) {
+        let tableArray = `<table style="border-collapse: collapse" border="1" width="800" >
+                         <tr>
+                            <th>Mã Sổ</th>
+                            <th>Loại Tiết Kiệm</th>
+                            <th>Tên Khách Hàng</th>
+                            <th>Chứng Minh Nhân Dân</th>
+                            <th>Ngày Mở Sổ</th>
+                            <th>Số Tiền Gửi</th>
+                         </tr>`;
+        for (let i = 0; i < list.length; i++) {
+            tableArray += `<tr>
+                            <td>${list[i].getMaSo()}</td>
+                            <td>${list[i].getLoaiTietKiem()}</td>
+                            <td>${list[i].getTenKhachHang()}</td>
+                            <td>${list[i].getChungMinhNhanDan()}</td>
+                            <td>${list[i].getNgayMoSo()}</td>
+                            <td>${list[i].getSoTienGui()}</td>
+                            <td><button onclick="xoaDanhSach(${i})">Xóa</button></td>
+                           </tr>`
+        }
+
+        tableArray += `</table>`;
+        document.getElementById("ketQua").innerHTML = tableArray;
+    }
+
+    // function xoaDanhSach(index) {
+    //     let thongBao = confirm("Bạn có muốn xóa sản phẩm này :" + soTietKiem[index].getMaSo() + "?");
+    //     if (thongBao) {
+    //         soTietKiem.splice(index, 1);
+    //     }
+    //     hienThiSoTietKiem(soTietKiem);
+    // }
+    function xoaDanhSach(index) {
+        let thongBao = prompt("Vui Lòng nhập mã sổ để xóa");
+        if (soTietKiem[thongBao].getMaSo()) {
+            let yeuCau = confirm("Bạn có chắc chắn xóa");
+            if (yeuCau) {
+                soTietKiem.splice(index, 1);
+            }
+        } else {
+            alert("Mã sổ tiết kiệm sai hoặc không có trong danh sách");
+        }
+        hienThiSoTietKiem(soTietKiem);
+    }
+
+    function addDanhSachSoTietKiem() {
+        let maSo = prompt("Nhập Mã Sổ");
+        while (isNaN(maSo) || maSo === "" || maSo.length > 5) {
+            maSo = prompt("Nhập Lại Mã Sổ <= 5");
+        }
+        let loaiTietKiem = prompt("Nhập Loại Tiết Kiệm");
+        while (!isNaN(loaiTietKiem) || loaiTietKiem === "" || loaiTietKiem.length > 10) {
+            loaiTietKiem = prompt("Nhập Lại Loại Tiết Kiệm");
+        }
+        let tenKhachHang = prompt("Nhập Tên Khách Hàng");
+        while (tenKhachHang === "" || !isNaN(tenKhachHang) || tenKhachHang.length > 30) {
+            tenKhachHang = prompt("Nhập Lại Tên Khách Hàng");
+        }
+        let chungMinhNhanDan = prompt("Nhập Số Chứng Minh Nhân Dân");
+        while (chungMinhNhanDan === "" || isNaN(chungMinhNhanDan)) {
+            chungMinhNhanDan = prompt("Nhập lại Số Chứng Minh Nhân Dân");
+        }
+        let ngayMoSo = prompt("Nhập Ngày Mở Sổ");
+        while (ngayMoSo === "" || isNaN(ngayMoSo)) {
+            ngayMoSo = prompt("Nhập Lại Ngày Mở Sổ");
+        }
+        let soTienGui = prompt("Nhập Số Tiền Gửi");
+        while (soTienGui === "" || isNaN(soTienGui)) {
+            soTienGui = prompt("Nhập lại số tiền gửi");
+        }
+        let danhSachSoTietKiem = new SoTietKiem(maSo, loaiTietKiem, tenKhachHang, chungMinhNhanDan, ngayMoSo, soTienGui);
+        soTietKiem.push(danhSachSoTietKiem);
+        hienThiSoTietKiem(soTietKiem);
+
+    }
+</script>
+</body>
+</html>

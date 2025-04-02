@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1 </title>
+</head>
+<body>
+<script>
+    let arrayNumber = prompt("Nhập độ dài của mảng");
+    let arr = [];
+    while (arrayNumber <= 0 || arrayNumber > 50 || isNaN(arrayNumber)) {
+        arrayNumber = prompt("Nhập lại độ dài của mảng");
+    }
+    for (let i = 0; i < arrayNumber; i++) {
+        let number = prompt("Nhập phần  tu thư: " + i);
+        while (isNaN(number) || number === "") {
+            number = prompt("Nhập lại phần tu thu " + i);
+        }
+        arr.push(parseInt(number));
+    }
+    alert(arr);
+
+    function checkSNT(num) {
+        if (num < 2) {
+            return false;
+        }
+        for (let j = 2; j < Math.sqrt(num); j++) {
+            if (num % j === 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function checkArraySNT(arr) {
+        let arraySNT = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (checkSNT(arr[i])) {
+                arraySNT.push(arr[i]);
+            }
+        }
+        return arraySNT;
+    }
+
+    alert(checkArraySNT(arr));
+
+</script>
+</body>
+</html>
